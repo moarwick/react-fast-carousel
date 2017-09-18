@@ -185,13 +185,13 @@ export default class ScrollbarCarousel extends Component {
    * Gets run on every "scroll" and "resize" event
    */
   setScrollInfo = () => {
-    this.slideWidth = this.el.scrollWidth / this.props.slides.length // width of individual slide item
+    this.slideWidth = this.el.scrollWidth / this.props.slides.length // current width of individual slide items
     this.scrollPos = this.el.scrollLeft // current scroll position
-    this.slideNum = this.scrollPos / this.slideWidth // current slide num (zero index, float)
+    this.slideNum = this.scrollPos / this.slideWidth // current slide num as float (zero index)
 
-    // internal slideNum (float) is used to show/hide chevrons only
+    // set (rounded) slideNum to state, to show/hide chevrons only
     this.setState({
-      slideNum: Math.floor(this.slideNum + 0.51) // used as halfway point threshold
+      slideNum: Math.floor(this.slideNum + 0.51)
     })
   }
 }

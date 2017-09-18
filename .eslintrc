@@ -1,0 +1,31 @@
+{
+  // apply ’standard’ rule set, then eslint-config-prettier to "resolve" conflicts
+  // to test for conflicts: `eslint --print-config .eslintrc.js | eslint-config-prettier-check`
+  "extends": ["standard", "prettier", "prettier/react"],
+  // use babel-eslint as parser to support advanced features, e.g. decorators
+  // without it linting of some files won't work
+  "parser": "babel-eslint",
+  // run prettier as an ESLint rule and report differences as individual ESLint issues
+  // https://github.com/prettier/eslint-plugin-prettier
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": false,
+        "singleQuote": true,
+        "printWidth": 100 // 80 is default
+      }
+    ],
+
+    // used for babel-eslint
+    "strict": 0,
+
+    // custom rules
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off"
+  }
+}

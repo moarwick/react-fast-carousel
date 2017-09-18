@@ -110,7 +110,7 @@ export default class ScrollbarCarousel extends Component {
     return (
       <div style={{ ...styles.container, ...this.props.style }}>
         <div ref={el => (this.el = el)} style={contentStyles}>
-          { renderedSlides }
+          {renderedSlides}
         </div>
         {isLeftNav && <NavPane {...navProps} left onClick={this.handleNavClick(-1)} />}
         {isRightNav && <NavPane {...navProps} onClick={this.handleNavClick(1)} />}
@@ -129,17 +129,19 @@ export default class ScrollbarCarousel extends Component {
     ))
   }
 
-  /* ----- STYLES ----- */
+  /* ----- HANDLERS ----- */
 
   handleNavClick(dir) {
     return e => {
       e.preventDefault()
       const { slidesShown } = this.props
-      const slideIncr = this.isTweening ? slidesShown : 0 // increment if user keeps clicking in mid-tween
-      const nextSlideNum = Math.round(this.slideNum + (slidesShown + slideIncr - 0.49) * dir)
-      this.animateToSlide(nextSlideNum)
+      const addSlides = this.isTweening ? slidesShown : 0 // increment if user keeps clicking in mid-tween
+      const toSlideNum = Math.round(this.slideNum + (slidesShown + addSlides - 0.49) * dir)
+      this.animateToSlide(toSlideNum)
     }
   }
+
+  /* ----- HELPERS ----- */
 
   /**
    * Apply "tweening" to el.scrollLeft to smoothly scroll slides to N slide's position
@@ -148,7 +150,6 @@ export default class ScrollbarCarousel extends Component {
     const easingFn = this.isTweening ? easeOutQuad : easeInOutQuad
     const fromPos = this.scrollPos
     const toPos = slideNum * this.slideWidth
-    let tweenPos = fromPos // init tween value
 
     window.cancelAnimationFrame(this.reqAnimFrame)
 
@@ -157,11 +158,13 @@ export default class ScrollbarCarousel extends Component {
       return
     }
 
+    let tweenPos = fromPos // init tween value
+    const tweenDur = 200 * this.props.slidesShown
     this.isTweening = true
 
     const animateScroll = () => {
       this.reqAnimFrame = window.requestAnimationFrame(() => {
-        const nextTween = getNextTween(tweenPos, fromPos, toPos, 300, easingFn)
+        const nextTween = getNextTween(tweenPos, fromPos, toPos, tweenDur, easingFn)
 
         this.el.scrollLeft = nextTween.eased // this also fires a scroll event, thus setScrollInfo()
         tweenPos = nextTween.linear // store linear value for next tween update
@@ -197,12 +200,10 @@ export default class ScrollbarCarousel extends Component {
 
 const styles = {
   container: {
-    position: 'relative',
-    width: '100%'
+    position: 'relative'
   },
   content: {
     overflowX: 'scroll',
-    overflowY: 'hidden',
     paddingBottom: 15,
     whiteSpace: 'nowrap'
   },
@@ -218,12 +219,6 @@ const styles = {
     cursor: 'pointer',
     height: '100%',
     zIndex: 1
-  },
-  navPaneLeft: {
-    left: 0
-  },
-  navPaneRight: {
-    left: '90%'
   },
   chevronIcon: {
     width: '66.66%'

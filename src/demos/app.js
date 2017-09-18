@@ -80,7 +80,7 @@ export default class CarouselDemo extends React.Component {
       navSize: 10,
       slidesTotal: 30,
       slidesShown: 3,
-      slideNum: 0
+      slideNum: 5
     }
   }
 

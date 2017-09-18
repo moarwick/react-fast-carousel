@@ -21,7 +21,7 @@
   "scripts": {
     "start": "webpack-dev-server --content-base src/demos/",
     "build": "rimraf public && webpack --progress --profile --colors",
-    "deploy": "npm run build && gh-pages -d build",
+    "deploy": "npm run build && gh-pages -d public",
     "dist": "babel src --out-dir lib --ignore demos",
     "lint": "eslint src",
     "lint-check": "eslint --print-config .eslintrc | eslint-config-prettier-check",

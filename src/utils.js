@@ -58,7 +58,7 @@ export function throttleEvent(type, name, obj) {
     }
     running = true
     window.requestAnimationFrame(function() {
-      obj.dispatchEvent(new CustomEvent(name))
+      obj.dispatchEvent(new window.CustomEvent(name))
       running = false
     })
   }

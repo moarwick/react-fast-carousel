@@ -70,6 +70,7 @@ function getWrapperStyles({ block, isStyleWidth, height, width, viewBox }) {
     if (width && typeof width !== 'number') {
       width = parseInt(width, 10)
     }
+
     if (height && typeof height !== 'number') {
       height = parseInt(height, 10)
     }
@@ -92,7 +93,7 @@ function getWrapperStyles({ block, isStyleWidth, height, width, viewBox }) {
 
 /**
  * Generate styles for svg tag
- * Positioned absolutely within the wrapper, to allow for positional offsetting
+ * Positioned absolutely within the wrapper, to allow for X/Y offsetting
  */
 function getSvgStyles(offsetX = 0, offsetY = 0, onClick = null) {
   return {

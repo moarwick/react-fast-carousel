@@ -1,7 +1,0 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:200,300,700);body {
-  font: 200 normal 16px 'Lato', sans-serif;
-  background-color: #FFF; }
-
-@media (max-width: 380px) {
-  .column, .column-short {
-    width: 100% !important; } }

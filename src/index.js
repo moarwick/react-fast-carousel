@@ -62,7 +62,6 @@ export default class ScrollbarCarousel extends Component {
     }
 
     this.el = null
-    this.slideNum = 0
     this.slideWidth = 0
     this.scrollPos = 0
     this.isTweening = false
@@ -136,7 +135,7 @@ export default class ScrollbarCarousel extends Component {
       e.preventDefault()
       const { slidesShown } = this.props
       const addSlides = this.isTweening ? slidesShown : 0 // increment if user keeps clicking in mid-tween
-      const toSlideNum = Math.round(this.slideNum + (slidesShown + addSlides - 0.49) * dir)
+      const toSlideNum = this.state.slideNum + ((slidesShown + addSlides) * dir)
       this.animateToSlide(toSlideNum)
     }
   }
@@ -181,18 +180,16 @@ export default class ScrollbarCarousel extends Component {
   }
 
   /**
-   * Acquire and set carousel sizing & scroll info into instance vars and set state to re-render
+   * Acquire and set sizing & scroll info into instance vars
+   * Set current slideNum to state to re-render nav panes
    * Gets run on every "scroll" and "resize" event
    */
   setScrollInfo = () => {
     this.slideWidth = this.el.scrollWidth / this.props.slides.length // current width of individual slide items
     this.scrollPos = this.el.scrollLeft // current scroll position
-    this.slideNum = this.scrollPos / this.slideWidth // current slide num as float (zero index)
+    const slideNum = Math.floor(this.scrollPos / this.slideWidth + 0.51) // current slide, use halfway point as threshold
 
-    // set (rounded) slideNum to state, to show/hide chevrons only
-    this.setState({
-      slideNum: Math.floor(this.slideNum + 0.51)
-    })
+    this.setState({ slideNum })
   }
 }
 

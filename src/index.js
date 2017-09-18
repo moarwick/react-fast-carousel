@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import IconChevronRight from './IconChevronRight'
 import IconChevronLeft from './IconChevronLeft'
@@ -31,7 +31,7 @@ const NavPane = ({ color, iconColor, left, onClick, size }) => {
 /**
  * ScrollbarCarousel
  */
-export default class ScrollbarCarousel extends Component {
+export default class ScrollbarCarousel extends PureComponent {
   static propTypes = {
     navColor: PropTypes.string,
     navIconColor: PropTypes.string,

@@ -14,7 +14,11 @@ NOTE: Early version, not tested on mobile...
 
 ### Installation
 ```
-npm install react-fast-carousel --save
+npm install https://github.com/moarwick/react-fast-carousel --save
+```
+or
+```
+yarn add install https://github.com/moarwick/react-fast-carousel
 ```
 
 ### Usage

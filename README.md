@@ -18,7 +18,7 @@ npm install https://github.com/moarwick/react-fast-carousel --save
 ```
 or
 ```
-yarn add install https://github.com/moarwick/react-fast-carousel
+yarn add https://github.com/moarwick/react-fast-carousel
 ```
 
 ### Usage
